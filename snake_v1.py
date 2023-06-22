@@ -2,7 +2,7 @@ import pygame,time
 
 screen_width = 700
 screen_hight = 500
-grid_size = 20
+grid_size = 5
 
 clock = pygame.time.Clock()
 quit_game = False
@@ -45,6 +45,6 @@ while not quit_game == True:
   pygame.draw.rect(screen, 'dark red', [snake_x, snake_y, grid_size, grid_size])
   
   pygame.display.update()
-  clock.tick(10)
+  clock.tick(30)
 
 pygame.quit()
