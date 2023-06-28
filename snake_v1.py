@@ -36,6 +36,10 @@ def get_middle_screen():
   
   return middle_of_screen
 
+
+
+
+
 pygame.init()
 
 font = pygame.font.SysFont("arialblack", 50)
