@@ -1,4 +1,6 @@
 import pygame,time
+import colours
+
 
 screen_width = 700
 screen_hight = 500
@@ -15,35 +17,24 @@ snake_x_change = 0
 snake_y_change = 0
 
 
-'format colour : rgb value (tulip)'
-
-colours = {
-  'black':  (0,0,0),
-  'white':  (255,255,255),
-  'green':  (0,255,0),
-  'red':    (255,0,0),
-  'blue' :  (0,0,255)
-}
+def get_screen_size():
+  '''
+  this gives the screen width and hight
+  outputs a tulip (screen_width,screen_hight)
+  '''
+  return pygame.display.get_window_size()
 
 def get_middle_screen():
   '''
-  This it the middle of the output screen 
-  outputs a tulip (middle x, middle y)
+  This returns the x and y positionss of the middle of the output screen 
+  outputs a tulip (middle_x, middle_y)
   '''
-  screen_width,screen_hight = pygame.display.get_window_size()
+  screen_width,screen_hight = get_screen_size()
   print(screen_width,screen_hight)
   middle_of_screen = (screen_width/2,screen_hight/2)
   
   return middle_of_screen
-
-
-
-
-
-pygame.init()
-
-font = pygame.font.SysFont("arialblack", 50)
-
+  
 def message(msg, text_colour, bkgd_colour):
   '''
   displays a text box in the middle of the screen 
@@ -53,11 +44,21 @@ def message(msg, text_colour, bkgd_colour):
   text_box = txt.get_rect(center = center_of_screen)
   screen.blit(txt, text_box)
 
+
+
+#game start
+pygame.init()
+
+font = pygame.font.SysFont("arialblack", 50)
+
 screen = pygame.display.set_mode((screen_width,screen_hight),pygame.RESIZABLE)
 print(pygame.display.get_window_size(),screen_width,screen_hight)
 
+#main game loop
 while not quit_game == True:
   for event in pygame.event.get():
+    #if pygame.WINDOWRESIZED:
+      #screen_width, screen_hight = get_screen_size()
     if event.type == pygame.QUIT:
       quit_game = True
     if event.type == pygame.KEYDOWN:
@@ -80,14 +81,14 @@ while not quit_game == True:
   snake_x += snake_x_change
   snake_y += snake_y_change
   
-  screen.fill('dark green')
+  screen.fill(colours.get('green'))
   
-  pygame.draw.rect(screen, 'dark red', [snake_x, snake_y, grid_size, grid_size])
+  pygame.draw.rect(screen, colours.get('red'), [snake_x, snake_y, grid_size, grid_size])
   
   pygame.display.update()
   clock.tick(frame_rate)
 
-message ("You died!", 'dark green', "dark red")
+message ("You died!", colours.get('green'), colours.get('red'))
 pygame.display.update()
 time.sleep(3)
 
