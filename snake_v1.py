@@ -7,11 +7,11 @@ screen_width = 700
 screen_hight = 500
 grid_size = 20
 frame_rate = 10
+middle_of_screen = ((screen_width/2),(screen_hight / 2))
 
 
 clock = pygame.time.Clock()
 quit_game = False
-middle_of_screen = ((screen_width/2),(screen_hight / 2))
 snake_x = (screen_width - grid_size) / 2 
 snake_y = (screen_hight - grid_size) / 2
 snake_x_change = 0
