@@ -14,12 +14,14 @@ snake_x = (screen_width - grid_size) / 2
 snake_y = (screen_height - grid_size) / 2
 snake_x_change = 0
 snake_y_change = 0
-
+fruit_x = 0
+fruit_y = 0
+fruit_spawned = 0
 
 def message(msg, text_colour, bkgd_colour):
     '''
-  displays a text box in the middle of the screen
-  '''
+    displays a text box in the middle of the screen
+    '''
     txt = font.render(msg, True, text_colour, bkgd_colour, )
     center_of_screen = fun.get_middle_screen()
     text_box = txt.get_rect(center=center_of_screen)
@@ -66,11 +68,15 @@ while not quit_game == True:
     if snake_x >= screen_width or snake_x < 0 or snake_y >= screen_height or snake_y < 0:
         quit_game = True
 
-    snake_x += snake_x_change
-    snake_y += snake_y_change
+    snake_x += int(snake_x_change)
+    snake_y += int(snake_y_change)
 
     screen.fill(colours['green'])
-    pygame.draw.rect(screen, colours['red'], [snake_x, snake_y, grid_size, grid_size])
+    fun.draw_snake(screen,colours,snake_x,snake_y,grid_size)
+
+    fruit = fun.spawn_fruit(screen,colours,screen_height,screen_width,grid_size,fruit_spawned,fruit_x,fruit_y)
+    fruit_x, fruit_y, fruit_spawned = fruit
+
 
     pygame.display.update()
     clock.tick(frame_rate)
