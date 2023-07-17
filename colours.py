@@ -1,5 +1,10 @@
+
+
+
+
 colours = {
-    'format': '"colour" : rgb value (tulip)',
+  #format = 
+    #'colour': (r,g,b)
     'black': (0, 0, 0),
     'white': (255, 255, 255),
     'green': (0, 150, 0),
