@@ -1,5 +1,6 @@
 import pygame , math
 import random as ran
+from colours import colours
 
 
 def get_screen_size():
@@ -24,8 +25,8 @@ def get_middle_screen():
 
 def draw_snake(screen,
                colours,
-               snake_x: int,
-               snake_y: int,
+               snake_x,
+               snake_y,
                grid_size: int):
     """
   draws the head of the snake
@@ -45,16 +46,16 @@ def generate_fruit(screen_height, screen_width, grid_size):
     return new_fruit_x, new_fruit_y
 
 
-def spawn_fruit(screen, colours, fruit_spawned, fruit_x, fruit_y, screen_height, screen_width, grid_size):
+def spawn_fruit(screen, colour: str, fruit_spawned, fruit_x, fruit_y, screen_height, screen_width, grid_size):
     """
 
     """
     if fruit_spawned == False:
         new_fruit_x, new_fruit_y = generate_fruit(screen_height, screen_width, grid_size)
         print(fruit_x,fruit_y)
-        pygame.draw.rect(screen, colours['orange'], [new_fruit_x, new_fruit_y, grid_size, grid_size])
-        pygame.draw.rect(screen, colours['orange'], [new_fruit_x, new_fruit_y, grid_size, grid_size])
         spawned = True
+        pygame.draw.rect(screen, colours[colour], [new_fruit_x, new_fruit_y, grid_size, grid_size])
         return new_fruit_x, new_fruit_y, spawned
     else:
+        pygame.draw.rect(screen, colours[colour], [fruit_x, fruit_y, grid_size, grid_size])
         return fruit_x, fruit_y, fruit_spawned
