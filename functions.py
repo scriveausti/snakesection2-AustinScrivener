@@ -1,6 +1,18 @@
 import pygame
 
 
+def snake_(snake_x,snake_y):
+  ''''''
+  snake_x = 0
+  snake_y = 0
+  snake_pos_been = {}
+  
+  for i in range(0,6):
+    snake_been = snake_x,snake_y
+    snake_pos_been[1] = (snake_been)
+    print (snake_pos_been)
+
+
 def get_screen_size():
   '''
   this gives the screen width and hight

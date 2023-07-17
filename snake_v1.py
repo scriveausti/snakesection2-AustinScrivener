@@ -9,6 +9,7 @@ grid_size = 20
 frame_rate = 10
 middle_of_screen = ((screen_width/2),(screen_hight / 2))
 
+score = 0
 
 clock = pygame.time.Clock()
 quit_game = False
@@ -68,9 +69,10 @@ while not quit_game == True:
 
   if snake_x >= screen_width or snake_x < 0 or snake_y >= screen_hight or snake_y < 0:
     quit_game = True
-  
+
   snake_x += snake_x_change
   snake_y += snake_y_change
+
   
   screen.fill(colours['green'])
   pygame.draw.rect(screen, colours['red'], [snake_x, snake_y, grid_size, grid_size])
