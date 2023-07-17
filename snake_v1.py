@@ -1,3 +1,5 @@
+import random
+
 import pygame, time
 import functions as fun
 from colours import colours
@@ -7,6 +9,7 @@ screen_height = 500
 grid_size = 20
 frame_rate = 10
 middle_of_screen = ((screen_width / 2), (screen_height / 2))
+score = 0
 
 clock = pygame.time.Clock()
 quit_game = False
@@ -14,12 +17,12 @@ snake_x = (screen_width - grid_size) / 2
 snake_y = (screen_height - grid_size) / 2
 snake_x_change = 0
 snake_y_change = 0
-
+fruit_spawned = False
 
 def message(msg, text_colour, bkgd_colour):
     '''
-  displays a text box in the middle of the screen
-  '''
+    displays a text box in the middle of the screen
+    '''
     txt = font.render(msg, True, text_colour, bkgd_colour, )
     center_of_screen = fun.get_middle_screen()
     text_box = txt.get_rect(center=center_of_screen)
@@ -35,6 +38,7 @@ screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE
 print(pygame.display.get_window_size(), screen_width, screen_height)
 
 # main game loop
+
 while not quit_game == True:
     for event in pygame.event.get():
         # when the window is resized the screen width and height are updated
@@ -69,8 +73,21 @@ while not quit_game == True:
     snake_x += snake_x_change
     snake_y += snake_y_change
 
+
     screen.fill(colours['green'])
-    pygame.draw.rect(screen, colours['red'], [snake_x, snake_y, grid_size, grid_size])
+    fun.draw_snake(screen,colours,snake_x,snake_y,grid_size)
+
+    while fruit_spawned == False:
+        fruit_x = random.randint(0,int(screen_height))
+        fruit_y = random.randint(0,int(screen_width))
+        fruit_spawned= True
+    pygame.draw.rect(screen, colours['orange'], [fruit_x, fruit_y, grid_size, grid_size])
+
+    if snake_x <= (fruit_x + 10) and snake_y <= (fruit_y + 10) and fruit_y > snake_y:
+        score += 1
+        print(score)
+        fruit_spawned = False
+
 
     pygame.display.update()
     clock.tick(frame_rate)
@@ -81,4 +98,3 @@ time.sleep(3)
 
 pygame.quit()
 quit()
-
