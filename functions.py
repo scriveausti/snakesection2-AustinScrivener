@@ -3,15 +3,13 @@ import random as ran
 from colours import colours
 
 def snake_(snake_x,snake_y):
-  ''''''
+  '''
+  
+  '''
   snake_x = 0
   snake_y = 0
   snake_pos_been = {}
   
-  for i in range(0,6):
-    snake_been = snake_x,snake_y
-    snake_pos_been[1] = (snake_been)
-    print (snake_pos_been)
 
 
 
@@ -36,14 +34,14 @@ def get_middle_screen():
 
 
 def draw_snake(screen,
-               colours,
+               colour,
                snake_x,
                snake_y,
                grid_size: int):
     """
   draws the head of the snake
   """
-    pygame.draw.rect(screen, colours['red'], [snake_x, snake_y, grid_size, grid_size])
+    pygame.draw.rect(screen, colours[colour], [snake_x, snake_y, grid_size, grid_size])
 
 
 def snake_tail(score: int):
@@ -53,21 +51,25 @@ def snake_tail(score: int):
     snake_length = score
 
 def generate_fruit(screen_height, screen_width, grid_size):
-    new_fruit_x = (ran.randint(0, round(screen_width / grid_size))) * grid_size
-    new_fruit_y = (ran.randint(0, round(screen_height / grid_size))) * grid_size
-    return new_fruit_x, new_fruit_y
+  """
+  generates a random poin on screen that on the same grid as the snake 
+  """
+  
+  new_fruit_x = (ran.randint(0, round(((screen_width-(grid_size*2)) / grid_size))) * grid_size)+grid_size
+  new_fruit_y = (ran.randint(0, round(((screen_height-(grid_size*2)) / grid_size))) * grid_size)+grid_size
+  return new_fruit_x, new_fruit_y
 
 
-def spawn_fruit(screen, colour: str, fruit_spawned, fruit_x, fruit_y, screen_height, screen_width, grid_size):
+def spawn_fruit(screen, colour: str, fruit_spawned, fruit_x, fruit_y, screen_height, screen_width, grid_size,fruit_size):
     """
-
+    draws the fruit and if there is no fruit on screen it will generate a new one 
     """
     if fruit_spawned == False:
         new_fruit_x, new_fruit_y = generate_fruit(screen_height, screen_width, grid_size)
         print(fruit_x,fruit_y)
         spawned = True
-        pygame.draw.rect(screen, colours[colour], [new_fruit_x, new_fruit_y, grid_size, grid_size])
+        pygame.draw.rect(screen, colours[colour], [new_fruit_x, new_fruit_y, fruit_size, fruit_size])
         return new_fruit_x, new_fruit_y, spawned
     else:
-        pygame.draw.rect(screen, colours[colour], [fruit_x, fruit_y, grid_size, grid_size])
+        pygame.draw.rect(screen, colours[colour], [fruit_x, fruit_y, fruit_size, fruit_size])
         return fruit_x, fruit_y, fruit_spawned
