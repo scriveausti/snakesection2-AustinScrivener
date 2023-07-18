@@ -151,8 +151,6 @@ while playing:
     while i < ((score*2)+2):
       tail_x = snake_pos_been[i]
       tail_y = snake_pos_been[i+1]
-      tail_pos_x[int((i-2)/2)] = (tail_x)
-      tail_pos_y[int((i-2)/2)] = (tail_y)
       pygame.draw.rect(screen, colours['dark red'], [tail_x, tail_y, grid_size, grid_size])
       i += 2
 
