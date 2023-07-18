@@ -7,9 +7,11 @@ from colours import colours
 screen_width = 700
 screen_height = 500
 grid_size = 20
-frame_rate = 10
+frame_rate = 5
 middle_of_screen = ((screen_width / 2), (screen_height / 2))
 score = 0
+
+collection_size = 10
 
 clock = pygame.time.Clock()
 quit_game = False
@@ -18,6 +20,8 @@ snake_y = (screen_height - grid_size) / 2
 snake_x_change = 0
 snake_y_change = 0
 fruit_spawned = False
+fruit_x = 0 
+fruit_y = 0
 
 def message(msg, text_colour, bkgd_colour):
     '''
@@ -27,6 +31,16 @@ def message(msg, text_colour, bkgd_colour):
     center_of_screen = fun.get_middle_screen()
     text_box = txt.get_rect(center=center_of_screen)
     screen.blit(txt, text_box)
+
+def menu():
+  """"""
+
+
+
+
+
+
+
 
 
 # game start
@@ -77,13 +91,14 @@ while not quit_game == True:
     screen.fill(colours['green'])
     fun.draw_snake(screen,colours,snake_x,snake_y,grid_size)
 
-    while fruit_spawned == False:
-        fruit_x = random.randint(0,int(screen_height))
-        fruit_y = random.randint(0,int(screen_width))
-        fruit_spawned= True
-    pygame.draw.rect(screen, colours['orange'], [fruit_x, fruit_y, grid_size, grid_size])
 
-    if snake_x <= (fruit_x + 10) and snake_y <= (fruit_y + 10) and fruit_y > snake_y:
+
+  #spawn fruit 
+    fruit_x,fruit_y,fruit_spawned = fun.spawn_fruit(screen,"orange",fruit_spawned,fruit_x,fruit_y,screen_height,screen_width,grid_size)
+  
+
+    #fruit collection 
+    if (snake_x <= (fruit_x + collection_size) and snake_y <= (fruit_y + collection_size)) and (snake_x >= (fruit_x - collection_size) and snake_y >= (fruit_y - collection_size)) :
         score += 1
         print(score)
         fruit_spawned = False
@@ -97,4 +112,3 @@ pygame.display.update()
 time.sleep(3)
 
 pygame.quit()
-quit()
