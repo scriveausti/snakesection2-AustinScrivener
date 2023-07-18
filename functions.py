@@ -1,15 +1,7 @@
-import pygame , math
+import pygame
 import random as ran
 from colours import colours
 
-def snake_(snake_x,snake_y):
-  '''
-  
-  '''
-  snake_x = 0
-  snake_y = 0
-  snake_pos_been = {}
-  
 
 
 
@@ -43,12 +35,6 @@ def draw_snake(screen,
   """
     pygame.draw.rect(screen, colours[colour], [snake_x, snake_y, grid_size, grid_size])
 
-
-def snake_tail(score: int):
-    """
-
-    """
-    snake_length = score
 
 def generate_fruit(screen_height, screen_width, grid_size):
   """
