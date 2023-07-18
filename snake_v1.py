@@ -154,6 +154,7 @@ while playing:
       pygame.draw.rect(screen, colours['dark red'], [tail_x, tail_y, grid_size, grid_size])
       i += 2
 
+      #tail colition 
       if snake_y == tail_y and snake_x == tail_x:
         playing = False
   
