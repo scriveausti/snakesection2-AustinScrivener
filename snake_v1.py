@@ -3,7 +3,10 @@ import pygame, time
 import functions as fun
 from colours import colours
 
-
+left_allowed = True
+right_allowed = True
+up_allowed = True
+down_allowed = True
 
 snake_colour = 'red'
 fruit_colour = 'orange'
@@ -16,7 +19,7 @@ grid_size = 20
 
 middle_of_screen = ((screen_width / 2), (screen_height / 2))
 score = 0
-highscore = 0
+
 
 clock = pygame.time.Clock()
 playing = True
@@ -39,6 +42,10 @@ tail_pos_y = {}
 background_colour = colours['green']
 
 score_and_highscore_space_from_border = 10
+
+highscore_file = open('highscore.txt','r')
+highscore = int(highscore_file.readline(1))
+highscore_file.close()
 
 
 
@@ -92,25 +99,38 @@ while playing:
         # snake movement
         if event.type == pygame.KEYDOWN:
 
-            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
+            if (event.key == pygame.K_LEFT or event.key == pygame.K_a) and left_allowed :
                 snake_x_change = -1 * grid_size
                 snake_y_change = 0
+                right_allowed = False
+                up_allowed = True
+                down_allowed = True
+                
 
-            elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+            elif (event.key == pygame.K_RIGHT or event.key == pygame.K_d) and right_allowed:
                 snake_x_change = grid_size
                 snake_y_change = 0
+                left_allowed = False
+                up_allowed = True
+                down_allowed = True
 
-            elif event.key == pygame.K_UP or event.key == pygame.K_w:
+            elif (event.key == pygame.K_UP or event.key == pygame.K_w) and up_allowed:
                 snake_y_change = -1 * grid_size
                 snake_x_change = 0
+                down_allowed = False
+                left_allowed = True
+                right_allowed = True
 
-            elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
+            elif (event.key == pygame.K_DOWN or event.key == pygame.K_s) and down_allowed:
                 snake_y_change = grid_size
                 snake_x_change = 0
+                up_allowed = False
+                left_allowed = True
+                right_allowed = True
 
 
   
-    if snake_x >= screen_width - grid_size or snake_x < 0 or snake_y >= screen_height - grid_size or snake_y < 0:
+    if snake_x >= screen_width - (grid_size/2) or snake_x < 0 or snake_y >= screen_height - (grid_size/2) or snake_y < 0:
         playing = False
 
 
@@ -157,7 +177,14 @@ while playing:
       #tail colition 
       if snake_y == tail_y and snake_x == tail_x:
         playing = False
-  
+
+
+
+    if score > highscore:
+      highscore_file = open('highscore.txt','w')
+      highscore_file.write(str(score))
+      highscore_file.close()
+      highscore = score
 
     ui(score, highscore ,score_and_highscore_space_from_border)
       
