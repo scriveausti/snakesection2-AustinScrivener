@@ -19,7 +19,6 @@ def get_middle_screen():
   outputs a tulip (middle_x, middle_y)
   """
     screen_width, screen_height = get_screen_size()
-    print('screen width: {}, screen height: {}'.format(screen_width, screen_height))
     middle_of_screen = (screen_width / 2, screen_height / 2)
 
     return middle_of_screen
@@ -41,8 +40,8 @@ def generate_fruit(screen_height, screen_width, grid_size,fruit_size):
   generates a random poin on screen that on the same grid as the snake 
   """
   
-  new_fruit_x = (ran.randint(fruit_size, round(((screen_width-(grid_size*2)) / grid_size))) * grid_size)+grid_size
-  new_fruit_y = (ran.randint(fruit_size, round(((screen_height-(grid_size*2)) / grid_size))) * grid_size)+grid_size
+  new_fruit_x = (ran.randint(fruit_size, round(((screen_width) / grid_size))) * grid_size)
+  new_fruit_y = (ran.randint(fruit_size, round(((screen_height) / grid_size))) * grid_size)
   return new_fruit_x, new_fruit_y
 
 
