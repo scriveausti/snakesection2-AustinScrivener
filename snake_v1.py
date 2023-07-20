@@ -10,6 +10,9 @@ down_allowed = True
 
 snake_colour = 'red'
 fruit_colour = 'orange'
+background_colour = 'green'
+ui_text_colour = 'black'
+
 
 frame_rate = 6
 screen_width = 700
@@ -39,7 +42,7 @@ fruit_collection_size = (fruit_size/2)
 tail_pos_x = {}
 tail_pos_y = {}
 
-background_colour = colours['green']
+
 
 score_and_highscore_space_from_border = 10
 
@@ -58,13 +61,13 @@ def message(msg, text_colour, bkgd_colour):
     text_box = txt.get_rect(center=center_of_screen)
     screen.blit(txt, text_box)
 
-def ui(score,highscore,space_from_border):
+def ui(score,highscore,space_from_border,text_colour):
   """
   displays score and highscore
   
   """
   
-  text_colour = colours['black']
+  text_colour = colours[text_colour]
   bkgd_colour = None
   #draw score 
   txt = font.render(('score: {}'.format(score)), True, text_colour, bkgd_colour)
@@ -83,7 +86,6 @@ pygame.init()
 font = pygame.font.SysFont("comicsans", 50)
 
 screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
-print(pygame.display.get_window_size(), screen_width, screen_height)
 
 # main game loop
 
@@ -139,7 +141,7 @@ while playing:
     snake_y += snake_y_change
   
     #clears the past frame 
-    screen.fill(background_colour)
+    screen.fill(colours[background_colour])
     #draws head of snake
     fun.draw_snake(screen,snake_colour,snake_x,snake_y,grid_size)
     
@@ -153,7 +155,7 @@ while playing:
     #fruit collection 
     if (snake_x <= (fruit_x + fruit_collection_size) and snake_y <= (fruit_y + fruit_collection_size)) and (snake_x >= (fruit_x - fruit_collection_size) and snake_y >= (fruit_y - fruit_collection_size)) :
         score += 1
-        print(score)
+        print("score: {}".format(score))
         fruit_spawned = False
 
     #snakes history 
@@ -166,7 +168,7 @@ while playing:
 
 
 
-  #draws snakes tail
+    #draws snakes tail & tail colition
     i =2
     while i < ((score*2)+2):
       tail_x = snake_pos_been[i]
@@ -186,7 +188,7 @@ while playing:
       highscore_file.close()
       highscore = score
 
-    ui(score, highscore ,score_and_highscore_space_from_border)
+    ui(score, highscore ,score_and_highscore_space_from_border,ui_text_colour)
       
     pygame.display.update()
     clock.tick(frame_rate)

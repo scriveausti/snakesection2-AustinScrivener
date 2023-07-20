@@ -19,7 +19,7 @@ def get_middle_screen():
   outputs a tulip (middle_x, middle_y)
   """
     screen_width, screen_height = get_screen_size()
-    print(screen_width, screen_height)
+    print('screen width: {}, screen height: {}'.format(screen_width, screen_height))
     middle_of_screen = (screen_width / 2, screen_height / 2)
 
     return middle_of_screen
@@ -52,7 +52,7 @@ def spawn_fruit(screen, colour: str, fruit_spawned, fruit_x, fruit_y, screen_hei
     """
     if fruit_spawned == False:
         new_fruit_x, new_fruit_y = generate_fruit(screen_height, screen_width, grid_size,fruit_size)
-        print(fruit_x,fruit_y)
+        print("fruit x: {}, fruit y: {}".format(fruit_x,fruit_y))
         spawned = True
         pygame.draw.rect(screen, colours[colour], [new_fruit_x, new_fruit_y, fruit_size, fruit_size])
         return new_fruit_x, new_fruit_y, spawned
